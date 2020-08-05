@@ -52,11 +52,24 @@ const App = () => {
   ])
 
   const deleteTask = (id) => {
-    console.log('delete' + id)
+    const taskList = [...tasks]
+    const index = taskList.findIndex(task => task.id === id)
+    taskList.splice(index, 1)
+
+    setTasks(taskList)
   }
 
   const changeTaskStatus = (id) => {
-    console.log('done' + id)
+    const taskList = [...tasks]
+
+    const index = taskList.findIndex(task => task.id === id)
+
+    taskList[index].active = false
+    taskList[index].finishDate = new Date().getTime()
+
+    setTasks(taskList)
+
+    console.log(taskList)
   }
 
   return (
