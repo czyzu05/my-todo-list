@@ -5,6 +5,7 @@ import AddTask from './AddTask'
 import TaskList from './TaskList'
 
 
+let counter = 5
 
 const App = () => {
 
@@ -68,14 +69,30 @@ const App = () => {
     taskList[index].finishDate = new Date().getTime()
 
     setTasks(taskList)
+  }
 
-    console.log(taskList)
+  const addTask = (text, date, important) => {
+    const task = {
+      id: counter,
+      text,
+      date,
+      important,
+      active: true,
+      finishDate: null
+    }
+    counter++
+
+    const taskList = [task, ...tasks]
+    setTasks(taskList)
+
+    console.log(counter)
+    return true
   }
 
   return (
     <div className="App">
-      TODO APP
-      <AddTask />
+      <h1>TODO APP</h1>
+      <AddTask add={addTask} />
       <TaskList tasks={tasks} delete={deleteTask} change={changeTaskStatus} />
     </div>
   )
